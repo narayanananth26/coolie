@@ -1,12 +1,11 @@
-import { User } from "@/models/user-schema";
-import { connectToDB } from "../connectToDB";
+import { db } from "../db";
 
 export const getUserByEmail = async (email: string) => {
 	try {
-		await connectToDB();
-
-		const user = await User.findOne({
-			email,
+		const user = await db.user.findUnique({
+			where: {
+				email: email,
+			},
 		});
 		return user;
 	} catch {
@@ -16,9 +15,11 @@ export const getUserByEmail = async (email: string) => {
 
 export const getUserById = async (id: string) => {
 	try {
-		await connectToDB();
-
-		const user = await User.findById(id);
+		const user = await db.user.findUnique({
+			where: {
+				id,
+			},
+		});
 		return user;
 	} catch {
 		return null;

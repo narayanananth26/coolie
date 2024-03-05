@@ -3,8 +3,8 @@
 import bcrypt from "bcrypt";
 import * as z from "zod";
 import { RegisterSchema } from "@/schemas";
-import { User } from "@/models/user-schema";
 import { getUserByEmail } from "@/lib/data/user-data";
+import { db } from "@/lib/db";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
 	const validatedFields = RegisterSchema.safeParse(values);
@@ -19,13 +19,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
 	const hashedPassword = await bcrypt.hash(password, 10);
 
-	const newUser = {
-		email,
-		password: hashedPassword,
-		name,
-	};
-
-	await User.create(newUser);
+	await db.user.create({
+		data: {
+			name,
+			email,
+			password: hashedPassword,
+		},
+	});
 
 	return { success: "User account created!" };
 };
