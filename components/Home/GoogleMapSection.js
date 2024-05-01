@@ -1,13 +1,14 @@
 import React, { useState,useContext, useEffect } from 'react'
 import { DirectionsRenderer, GoogleMap, MarkerF, OverlayView, OverlayViewF, useJsApiLoader } from '@react-google-maps/api';
-import { SourceContext } from '@/context/SourceContext';
-import { DestinationContext } from '@/context/DestinationContext';
+import { SourceContext } from '../../context/SourceContext';
+import { DestinationContext } from '../../context/DestinationContext';
 
 
 function GoogleMapSection() {
   const containerStyle = {
     width: '100%',
-    height: '250%'
+    height: '100%',
+    minHeight:'575px'
   };
 
 

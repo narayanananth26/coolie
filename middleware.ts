@@ -7,22 +7,15 @@ export async function middleware(req: NextRequest) {
 		req: req,
 		secret: process.env.NEXTAUTH_SECRET,
 	});
-
-	const publicPaths = path === "/login" || path === "/signup";
-
-	if (publicPaths && token) {
-		// If the user is authenticated and tries to access public paths, redirect them to the dashboard
-		return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
-	} else if (!publicPaths && !token) {
-		// If the user is not authenticated and tries to access private paths, redirect them to the homepage
-		return NextResponse.redirect(new URL("/", req.nextUrl));
+	console.log("token", token);
+	if (path === "/dashboard" && !token) {
+		return NextResponse.redirect(new URL("/login", req.nextUrl));
 	}
-
-	// If the user is authenticated and tries to access private paths or if the user is not authenticated and tries to access public paths,
-	// let the request pass through
-	return null;
+	if ((path === "/login" || path === "/signup") && token) {
+		return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+	}
 }
 
 export const config = {
-	matcher: ["/", "/login", "/signup", "/dashboard"],
+	matcher: ["/", "/signup", "/dashboard"],
 };

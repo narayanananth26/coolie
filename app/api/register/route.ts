@@ -1,11 +1,11 @@
-import { connectToDB } from "@/utils/config/db";
-import User from "@/utils/models/userSchema";
+import { connect } from "../../utils/config/dbConfig";
+import User from "../../utils/models/auth";
 import bcryptjs from "bcryptjs";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 
-connectToDB();
+connect();
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
 	try {
 		const { name, email, password } = await request.json();
 
@@ -34,7 +34,7 @@ export async function POST(request) {
 			success: true,
 			savedUser,
 		});
-	} catch (error) {
+	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 500 });
 	}
 }

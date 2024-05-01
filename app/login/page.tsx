@@ -1,35 +1,33 @@
 "use client";
 
-import { Mail, Lock, User } from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
-import bg from "../../public/bg-2.png";
+import bg from "../../public/bg3.png";
 import logo from "../../public/logo.png";
 import google from "../../public/google2.svg";
-import axios from "axios";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-const Signup = () => {
+const Login = () => {
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const [error, setError] = useState("");
 	const [user, setUser] = useState({
-		name: "",
 		email: "",
 		password: "",
 	});
 
-	const handleInputChange = (event) => {
+	const handleInputChange = (event: any) => {
 		const { name, value } = event.target;
 		return setUser((prevInfo) => ({ ...prevInfo, [name]: value }));
 	};
-	const handleSubmit = async (e) => {
+
+	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 		setLoading(true);
-		console.log(user);
 		try {
-			if (!user.name || !user.email || !user.password) {
+			if (!user.email || !user.password) {
 				setError("please fill all the fields");
 				return;
 			}
@@ -39,13 +37,20 @@ const Signup = () => {
 				setError("invalid email id");
 				return;
 			}
-			const res = await axios.post("/api/register", user);
-			console.log(res.data);
-			if (res.status == 200 || res.status == 201) {
-				console.log("user added successfully");
-				setError("");
-				router.push("/");
+
+			const res = await signIn("credentials", {
+				email: user.email,
+				password: user.password,
+				redirect: false,
+			});
+
+			if (res?.error) {
+				console.log(res);
+				setError("error");
 			}
+
+			setError("");
+			router.push("/dashboard");
 		} catch (error) {
 			console.log(error);
 			setError("");
@@ -53,7 +58,6 @@ const Signup = () => {
 			setLoading(false);
 
 			setUser({
-				name: "",
 				email: "",
 				password: "",
 			});
@@ -88,24 +92,14 @@ const Signup = () => {
 								height={100}
 							/>
 						</div>
+						<div className="text-slate-900 font-medium text-xl py-5">
+							Hello! Welcome Back
+						</div>
+
 						<form
 							className="w-full px-5 py-6 space-y-6"
 							onSubmit={handleSubmit}
 						>
-							<div className="flex flex-col w-full lg:px-5">
-								<label className="text-sm">Fullname</label>
-								<div className="bg-white flex justify-start items-start py-3 px-4 rounded text-slate-600 text-lg mt-1">
-									<User className="w-7 h-7 text-[#A1BDFD]" />
-									<input
-										type={"text"}
-										placeholder="John Doe"
-										name="name"
-										className="outline-none w-full px-4"
-										value={user.name}
-										onChange={handleInputChange}
-									/>
-								</div>
-							</div>
 							<div className="flex flex-col w-full lg:px-5">
 								<label className="text-sm">Email</label>
 								<div className="bg-white flex justify-start items-start py-3 px-4 rounded text-slate-600 text-lg mt-1">
@@ -133,15 +127,13 @@ const Signup = () => {
 										onChange={handleInputChange}
 									/>
 								</div>
+
 								<div className="grid place-items-center w-full mx-auto pt-7">
-									{error && (
-										<p className="py-6 text-lg">{error}</p>
-									)}
 									<button
 										type="submit"
 										className="bg-[#5D7DF3] text-white text-lg w-full px-8 py-3 rounded-md uppercase font-semibold"
 									>
-										{loading ? "Processing" : " Register"}
+										Login
 									</button>
 								</div>
 								<div className="flex justify-center w-full items-center gap-3 py-3">
@@ -149,24 +141,26 @@ const Signup = () => {
 									<div className="mt-3">or</div>
 									<div className="border-b border-gray-800 py-2 w-full px-6" />
 								</div>
-								<div
-									onClick={() => signIn("google")}
-									className="rounded px-6 py-2 shadow cursor-pointer bg-gray-50 grid place-items-center mx-auto mb-8"
-								>
-									<Image
-										src={google}
-										alt="bg"
-										width={100}
-										height={100}
-									/>
-								</div>{" "}
+								<div className="flex justify-center items-center w-full gap-8 pb-8">
+									<div
+										onClick={() => signIn("google")}
+										className="rounded px-6 py-2 shadow cursor-pointer bg-gray-50 grid place-items-center mx-auto mb-4"
+									>
+										<Image
+											src={google}
+											alt="bg"
+											width={100}
+											height={100}
+										/>
+									</div>{" "}
+								</div>
 								<div className="text-lg text-slate-900 font-medium">
-									<span>Have an account?</span>
+									<span>Don't have an account?</span>
 									<a
-										href="/"
+										href="/signup"
 										className="text-[#5D7DF3] pl-3 hover:underline"
 									>
-										Login
+										Create an account
 									</a>
 								</div>
 							</div>
@@ -178,4 +172,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default Login;

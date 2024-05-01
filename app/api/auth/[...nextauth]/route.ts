@@ -1,19 +1,22 @@
-import { connectToDB } from "@/utils/config/db";
-import User from "@/utils/models/userSchema";
-import NextAuth from "next-auth";
+import { connect } from "../../../utils/config/dbConfig";
+import User from "../../../utils/models/auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bycrptjs from "bcryptjs";
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
 	providers: [
 		CredentialsProvider({
 			name: "credentials",
 			credentials: {},
 			async authorize(credentials) {
-				const { email, password } = credentials;
+				const { email, password } = credentials as {
+					email: string;
+					password: string;
+				};
 				try {
-					await connectToDB();
+					await connect();
 					const user = await User.findOne({ email });
 					if (!user) {
 						return null;
@@ -32,8 +35,8 @@ export const authOptions = {
 			},
 		}),
 		GoogleProvider({
-			clientId: process.env.GOOGLE_CLIENT_ID,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+			clientId: process.env.GOOGLE_CLIENT_ID as string,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
 		}),
 	],
 
@@ -42,11 +45,11 @@ export const authOptions = {
 	},
 
 	callbacks: {
-		async signIn({ user, account }) {
+		async signIn({ user, account }: { user: any; account: any }) {
 			if (account.provider === "google") {
 				try {
-					const { name, email } = user;
-					await connectToDB();
+					const { name, email, image } = user;
+					await connect();
 					const ifUserExists = await User.findOne({ email });
 					if (ifUserExists) {
 						return user;
@@ -54,6 +57,8 @@ export const authOptions = {
 					const newUser = new User({
 						name: name,
 						email: email,
+						image: image,
+						role: "user",
 					});
 					const res = await newUser.save();
 					if (res.status === 200 || res.status === 201) {
@@ -70,20 +75,23 @@ export const authOptions = {
 			if (user) {
 				token.email = user.email;
 				token.name = user.name;
+				console.log("User:", user);
 			}
 			return token;
 		},
 
-		async session({ session, token }) {
+		async session({ session, token }: { session: any; token: any }) {
 			if (session.user) {
 				session.user.email = token.email;
 				session.user.name = token.name;
+				session.user.image = token.picture;
+				session.user.role = token.role;
 			}
 			console.log(session);
 			return session;
 		},
 	},
-	secret: process.env.NEXTAUTH_SECRET,
+	secret: process.env.NEXTAUTH_SECRET!,
 	pages: {
 		signIn: "/",
 	},
