@@ -71,23 +71,34 @@ export const authOptions: NextAuthOptions = {
 			}
 			return user;
 		},
-		async jwt({ token, user }) {
-			if (user) {
-				token.email = user.email;
-				token.name = user.name;
-				console.log("User:", user);
+		async jwt({ token }) {
+			const existingUser = await User.findOne({ email: token.email });
+			console.log("existingUser", existingUser);
+			if (existingUser) {
+				token.email = existingUser.email;
+				token.name = existingUser.name;
+				token.role = existingUser.role;
 			}
 			return token;
 		},
 
 		async session({ session, token }: { session: any; token: any }) {
+			console.log("token", token);
+			if (token.sub && session.user) {
+				session.user.id = token.sub;
+			}
+
+			if (token.role && session.user) {
+				session.user.role = token.role;
+			}
+
 			if (session.user) {
 				session.user.email = token.email;
 				session.user.name = token.name;
 				session.user.image = token.picture;
 				session.user.role = token.role;
 			}
-			console.log(session);
+			console.log("session", session);
 			return session;
 		},
 	},
