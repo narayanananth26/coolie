@@ -38,7 +38,7 @@ const CheckoutForm = ({ amount }) => {
 				},
 			})
 			.then(alert("Payment Success"))
-			.then(router.push("/"));
+			.then(router.push("/payment-success"));
 	};
 	return (
 		<div className="flex flex-col justify-center items-center w-full mt-6 ">

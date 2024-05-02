@@ -50,7 +50,6 @@ const Login = () => {
 			}
 
 			setError("");
-			router.push("/dashboard");
 		} catch (error) {
 			console.log(error);
 			setError("");
@@ -61,6 +60,7 @@ const Login = () => {
 				email: "",
 				password: "",
 			});
+			router.push("/dashboard");
 		}
 	};
 	return (
@@ -143,8 +143,12 @@ const Login = () => {
 								</div>
 								<div className="flex justify-center items-center w-full gap-8 pb-8">
 									<div
-										onClick={() => signIn("google")}
-										className="rounded px-6 py-2 shadow cursor-pointer bg-gray-50 grid place-items-center mx-auto mb-4"
+										onClick={() =>
+											signIn("google", {
+												callbackUrl: "/",
+											})
+										}
+										className="rounded px-6 py-2 shadow cursor-pointer w-full bg-gray-50 grid place-items-center mx-auto mb-4"
 									>
 										<Image
 											src={google}

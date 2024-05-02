@@ -34,21 +34,21 @@ function Header() {
 						/>
 					</Link>
 					<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5 text-xl">
-						<a href="#about">
+						<Link href="/place-order">
 							<button className="text-white hover:bg-red-700 p-2 rounded-lg">
-								About Us
+								Send Parcel
 							</button>
-						</a>
-						<a href="#review">
+						</Link>
+						<Link href="/dashboard">
 							<button className="text-white hover:bg-red-700 p-2 rounded-lg">
-								Reviews
+								Dashboard
 							</button>
-						</a>
-						<a href="#faq">
+						</Link>
+						<Link href="/enlist-as-koolie">
 							<button className="text-white hover:bg-red-700 p-2 rounded-lg">
-								FAQ's
+								Become a Koolie!
 							</button>
-						</a>
+						</Link>
 					</div>
 					{session?.user ? (
 						<UserProfile />
