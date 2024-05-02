@@ -14,10 +14,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className="max-w-screen-xl min-h-screen flex flex-col h-screen scrollbar-none overflow-x-hidden">
 				<AuthProvider>
 					<Header />
-					{children}
+					<div className="overflow-x-hidden overflow-y-scroll scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-red-50">
+						{children}
+					</div>
 				</AuthProvider>
 			</body>
 		</html>

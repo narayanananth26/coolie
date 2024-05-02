@@ -1,5 +1,5 @@
 import { connect } from "../../../utils/config/dbConfig";
-import User from "../../../utils/models/auth";
+import User from "../../../utils/models/user";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -78,14 +78,15 @@ export const authOptions: NextAuthOptions = {
 				token.email = existingUser.email;
 				token.name = existingUser.name;
 				token.role = existingUser.role;
+				token.id = existingUser._id;
 			}
 			return token;
 		},
 
 		async session({ session, token }: { session: any; token: any }) {
 			console.log("token", token);
-			if (token.sub && session.user) {
-				session.user.id = token.sub;
+			if (token.id && session.user) {
+				session.user.id = token.id;
 			}
 
 			if (token.role && session.user) {

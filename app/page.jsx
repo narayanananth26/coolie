@@ -5,12 +5,7 @@ import Fullpage from "../components/Fullpage";
 const Home = () => {
 	const { data: session } = useSession();
 
-	return (
-		<>
-			<div>{session?.user?.role}</div>
-			<Fullpage />
-		</>
-	);
+	return <Fullpage />;
 };
 
 export default Home;

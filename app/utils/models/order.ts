@@ -6,14 +6,9 @@ const orderSchema = new mongoose.Schema({
 		ref: "User",
 		required: true,
 	},
-	koolieId: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
-		required: true,
-	},
 	price: { type: Number, required: true },
-	pickupLocation: { type: String, required: true },
-	dropLocation: { type: String, required: true },
+	source: { type: String, required: true },
+	destination: { type: String, required: true },
 	timestamp: { type: Date, default: Date.now },
 	status: {
 		type: String,

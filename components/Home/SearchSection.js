@@ -20,7 +20,7 @@ function SearchSection() {
 		);
 		//console.log(dist*0.000621374);
 		setDistance(dist * 0.000621374);
-		setDestination(dist * 0.000621374);
+		// setDestination(dist * 0.000621374);
 	};
 
 	useEffect(() => {
@@ -34,19 +34,24 @@ function SearchSection() {
 	return (
 		<div>
 			<div className="p-2 md:pd-6 border-[2px] rounded-xl">
-				<p className="text-[100x] font-bold">Get a ride</p>
+				<p className="text-3xl font-bold">Call a Koolie!</p>
 				<InputItem type="source" />
 				<InputItem type="destination" />
 
 				<button
-					className="p-3 bg-black w-full mt-5 text-white"
+					className="p-3 bg-[#f84f66] w-full mt-5 rounded-md text-white font-bold text-xl"
 					onClick={() => calculateDistance()}
 				>
-					Search
+					Calculate
 				</button>
 			</div>
+			{console.log("testttee", distance)}
 			{distance ? (
-				<CarListOptions distance={distance * 13}></CarListOptions>
+				<CarListOptions
+					distance={distance * 13}
+					source={source}
+					destination={destination}
+				></CarListOptions>
 			) : null}
 		</div>
 	);

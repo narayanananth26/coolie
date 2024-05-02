@@ -5,6 +5,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
+import Link from "next/link";
 const Fullpage = () => {
 	const settings = {
 		dots: true,
@@ -43,38 +45,8 @@ const Fullpage = () => {
 	];
 	return (
 		<div>
-			<div className="container mx-auto my-10 ">
-				<div className="bg-[#f84f66] px-6 lg:px-16 py-10 rounded-3xl">
-					<div className="p-5">
-						<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5">
-							<img
-								src="/assets/cooliebg.png"
-								alt="logo"
-								height={400}
-								width={100}
-							/>
-							<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5">
-								<a href="#about">
-									<button className="text-white hover:bg-red-700 p-2 rounded-lg">
-										About Us
-									</button>
-								</a>
-								<a href="#review">
-									<button className="text-white hover:bg-red-700 p-2 rounded-lg">
-										Reviews
-									</button>
-								</a>
-								<a href="#faq">
-									<button className="text-white hover:bg-red-700 p-2 rounded-lg">
-										FAQ's
-									</button>
-								</a>
-							</div>
-							<button className="btn bg-white text-[#7270dd] border-none hover:bg-[#7270dd] hover:text-white capitalize rounded-full">
-								Sign In
-							</button>
-						</div>
-					</div>
+			<div className="container mx-auto">
+				<div className="bg-[#f84f66] px-6 lg:px-16 py-10 rounded-b-3xl">
 					<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5">
 						<div className="flex flex-col gap-5 lg:gap-10">
 							<p className=" text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-medium">
@@ -88,9 +60,11 @@ const Fullpage = () => {
 								<br className="lg:flex hidden" /> whatever you
 								need
 							</p>
-							<button className="btn btn-sm lg:btn-lg bg-[#524fd5] text-white rounded-full border-none w-36 lg:w-44 capitalize">
-								Sign In
-							</button>
+							<Link href="/place-order">
+								<button className="bg-white flex-start rounded-full px-5 w-fit py-3">
+									Hire a Koolie now! →
+								</button>
+							</Link>
 						</div>
 						<img
 							src="/assets/coolie.jpg"
@@ -106,7 +80,7 @@ const Fullpage = () => {
 				<p className="text-base lg:text-xl font-medium text-gray-500 text-center">
 					WHY CHOOSE US
 				</p>
-				<p className=" text-3xl lg:text-5xl font-semibold text-gray-500 text-center mt-3">
+				<p className="text-3xl lg:text-5xl font-semibold text-gray-500 text-center mt-3">
 					Our Values
 				</p>
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16 py-20">
@@ -147,22 +121,22 @@ const Fullpage = () => {
 				</div>
 			</div>
 			<div className="container mx-auto py-20" id="about">
-				<p className="text-base lg:text-xl font-medium text-gray-500 uppercase">
+				<p className="text-base lg:text-xl font-medium text-gray-500 text-center uppercase">
 					Key Person
 				</p>
-				<p className="text-3xl lg:text-5xl font-semibold text-gray-500  mt-3">
+				<p className="text-3xl lg:text-5xl font-semibold text-gray-500 text-center mt-3">
 					Meet Our Team
 				</p>
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-16 py-10 lg:py-20 flex justify-between">
 					<div className="flex flex-col gap-3 items-center">
-						<img
+						<Image
 							src="/assets/sailesh.jpeg"
 							alt="v1"
 							height={200}
 							width={200}
-							className="rounded-lg"
+							className="rounded-full"
 						/>
-						<p className="text-2xl font-semibold">
+						<p className="text-xl font-semibold text-slate-500 uppercase">
 							Adithya Sailesh
 						</p>
 						<div className="flex items-center gap-2"></div>
@@ -173,9 +147,11 @@ const Fullpage = () => {
 							alt="v1"
 							height={200}
 							width={200}
-							className="rounded-lg"
+							className="rounded-full"
 						/>
-						<p className="text-2xl font-semibold">Alias Benny</p>
+						<p className="text-xl font-semibold text-slate-500 uppercase">
+							Alias Benny
+						</p>
 						<div className="flex items-center gap-2"></div>
 					</div>
 					<div className="flex flex-col gap-3 items-center">
@@ -184,9 +160,11 @@ const Fullpage = () => {
 							alt="v1"
 							height={200}
 							width={200}
-							className="rounded-lg"
+							className="rounded-full"
 						/>
-						<p className="text-2xl font-semibold">Ananth Narayan</p>
+						<p className="text-xl font-semibold text-slate-500 uppercase">
+							Ananth Narayan
+						</p>
 						<div className="flex items-center gap-2"></div>
 					</div>
 					<div className="flex flex-col gap-3 items-center">
@@ -195,194 +173,166 @@ const Fullpage = () => {
 							alt="v1"
 							height={200}
 							width={200}
-							className="rounded-lg"
+							className="rounded-full"
 						/>
-						<p className="text-2xl font-semibold ">Hari P</p>
+						<p className="text-xl font-semibold text-slate-500 uppercase">
+							Hari P
+						</p>
 						<div className="flex items-center gap-2"></div>
 					</div>
 				</div>
 			</div>
-			<Slider {...settings}>
-				<div className="container mx-auto" id="review">
-					<p className="text-gray-500 text-base lg:text-xl font-medium uppercase">
-						Thanks to you
-					</p>
-					<p className="text-gray-800 text-3xl lg:text-5xl font-medium capitalize">
-						We are growing day-by-day
-					</p>
-					<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5 py-10 lg:py-20">
-						<img
-							src="/assets/lady2.jpeg"
-							alt=""
-							height={400}
-							width={300}
-							className="rounded-xl"
-						/>
-						<div className="flex flex-col gap-5 items-start">
-							<p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
-								Clara Eldho
-							</p>
-							<div className="flex items-center gap-2 ">
-								<img
-									src="/assets/india.jpg"
-									alt="itersfgjds"
-									height={50}
-									width={50}
-								/>
-								<p className="text-gray-500">Entrepreneur</p>
+			<div>
+				<p className="text-base lg:text-xl font-medium text-gray-500 text-center uppercase">
+					Thanks to you
+				</p>
+				<p className="text-3xl lg:text-5xl font-semibold text-gray-500 text-center mt-3 uppercase">
+					We are growing day-by-day
+				</p>
+				<Slider {...settings}>
+					<div className="container mx-auto" id="review">
+						<div className="flex-center gap-6 bg-slate-100 rounded-xl mx-5 my-5 px-3 py-3">
+							<Image
+								src="/assets/lady2.jpeg"
+								alt=""
+								height={200}
+								width={200}
+								className="rounded-xl"
+							/>
+							<div className="flex flex-col gap-5 items-start">
+								<p className="text-lg">Clara Eldho</p>
+								<div className="flex items-center gap-2 ">
+									<Image
+										src="/assets/india.jpg"
+										alt="itersfgjds"
+										height={50}
+										width={50}
+										className="rounded-full"
+									/>
+									<p className="text-gray-500">
+										Entrepreneur
+									</p>
+								</div>
+								<p className="text-lg italic">
+									“Way better than Porter. Have shifted all my
+									logistics needs to Koolie and I can now
+									safely focus on my business growth. Amazing
+									service!”
+								</p>
 							</div>
-							<p className=" text-base sm:text-lg md:text-2xl lg:text-3xl w-xl">
-								“Way better than Porter. Have shifted all my
-								logistics needs to Koolie and I can now safely
-								focus on my business growth. Amazing service!”
-							</p>
 						</div>
 					</div>
-				</div>
-				{/* <div className="container mx-auto ">
-        <p className="text-gray-500 text-base lg:text-xl font-medium uppercase">
-          Thanks to you
-        </p>
-        <p className="text-gray-800 text-3xl lg:text-5xl font-medium capitalize">
-          We are growing day-by-day
-        </p>
-        <div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5 py-10 lg:py-20">
-          <img src="/assets/student.svg" alt="" />
-          <div className="flex flex-col gap-5 items-start">
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">Dinesh</p>
-            <div className="flex items-center gap-2">
-              <img src="/assets/uk.svg" alt="itersfgjds" />
-              <p className="text-gray-500">Entrepreneur</p>
-            </div>
-            <p className=" text-base sm:text-lg md:text-2xl lg:text-3xl">
-              “Excellent service by multiple drivers. <br />  I own a business and do multiple shiftings.  <br /> Rather than ask local drivers and bargain <br></br>every time, I use porter which fulfils all my need.<br/> Thanks a lot!”
-            </p>
-          </div>
-        </div>
-      </div> */}
-				{/* Add more slides here if needed */}
-				<div className="container mx-auto">
-					<p className="text-gray-500 text-base lg:text-xl font-medium uppercase">
-						Thanks to you
-					</p>
-					<p className="text-gray-800 text-3xl lg:text-5xl font-medium capitalize">
-						We are growing day-by-day
-					</p>
-					<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5 py-10 lg:py-20">
-						<img
-							src="/assets/man1.jpeg"
-							alt=""
-							height={250}
-							width={250}
-						/>
-						<div className="flex flex-col gap-5 items-start">
-							<p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
-								Aarav Anilkumar
-							</p>
-							<div className="flex items-center gap-2 ">
-								<img
-									src="/assets/india.jpg"
-									alt="itersfgjds"
-									height={50}
-									width={50}
-								/>
-								<p className="text-gray-500">Influencer</p>
+
+					<div className="container mx-auto">
+						<div className="flex-center gap-6 bg-slate-100 rounded-xl mx-5 my-5 px-3 py-3">
+							<Image
+								src="/assets/man1.jpeg"
+								alt=""
+								height={200}
+								width={200}
+								className="rounded-xl"
+							/>
+							<div className="flex flex-col gap-5 items-start">
+								<p className="text-lg font-semibold">
+									Aarav Anilkumar
+								</p>
+								<div className="flex items-center gap-2 ">
+									<Image
+										src="/assets/india.jpg"
+										alt="itersfgjds"
+										height={50}
+										width={50}
+									/>
+									<p className="text-gray-500">Influencer</p>
+								</div>
+								<p className="text-lg italic">
+									“Excellent service by multiple drivers. I
+									own a business and do multiple shiftings.
+									Rather than ask local drivers and bargain
+									every time, I use Koolie which fulfils all
+									my need. Thanks a lot!”
+								</p>
 							</div>
-							<p className=" text-base sm:text-lg md:text-2xl lg:text-3xl w-xl">
-								“Excellent service by multiple drivers. I own a
-								business and do multiple shiftings. Rather than
-								ask local drivers and bargain every time, I use
-								Koolie which fulfils all my need. Thanks a lot!”
-							</p>
 						</div>
 					</div>
-				</div>
-				<div className="container mx-auto">
-					<p className="text-gray-500 text-base lg:text-xl font-medium uppercase">
-						Thanks to you
-					</p>
-					<p className="text-gray-800 text-3xl lg:text-5xl font-medium capitalize">
-						We are growing day-by-day
-					</p>
-					<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5 py-10 lg:py-20">
-						<img
-							src="/assets/man2.jpeg"
-							alt=""
-							height={250}
-							width={250}
-						/>
-						<div className="flex flex-col gap-5 items-start">
-							<p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
-								Vikram Iyer
-							</p>
-							<div className="flex items-center gap-2 ">
-								<img
-									src="/assets/india.jpg"
-									alt="itersfgjds"
-									height={50}
-									width={50}
-								/>
-								<p className="text-gray-500">Entrepreneur</p>
+					<div className="container mx-auto">
+						<div className="flex-center gap-6 bg-slate-100 rounded-xl mx-5 my-5 px-3 py-3">
+							<Image
+								src="/assets/man2.jpeg"
+								alt=""
+								height={200}
+								width={200}
+								className="rounded-xl"
+							/>
+							<div className="flex flex-col gap-5 items-start">
+								<p className="text-lg">Vikram Iyer</p>
+								<div className="flex items-center gap-2 ">
+									<Image
+										src="/assets/india.jpg"
+										alt="itersfgjds"
+										height={50}
+										width={50}
+									/>
+									<p className="text-gray-500">
+										Entrepreneur
+									</p>
+								</div>
+								<p className="text-lg italic">
+									“Have had an amazing experience. Had three
+									successful deliveries where it’s a struggle
+									to arrange a tempo service for your desired
+									pickup and drop off. Must try this app!”
+								</p>
 							</div>
-							<p className=" text-base sm:text-lg md:text-2xl lg:text-3xl w-xl">
-								“Have had an amazing experience. Had three
-								successful deliveries where it’s a struggle to
-								arrange a tempo service for your desired pickup
-								and drop off. Must try this app!”
-							</p>
 						</div>
 					</div>
-				</div>
-				<div className="container mx-auto">
-					<p className="text-gray-500 text-base lg:text-xl font-medium uppercase">
-						Thanks to you
-					</p>
-					<p className="text-gray-800 text-3xl lg:text-5xl font-medium capitalize">
-						We are growing day-by-day
-					</p>
-					<div className="flex flex-col lg:flex-row justify-center  lg:justify-between items-center gap-5 py-10 lg:py-20">
-						<img
-							src="/assets/lady3.jpeg"
-							alt=""
-							height={250}
-							width={250}
-						/>
-						<div className="flex flex-col gap-5 items-start">
-							<p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
-								Smriti Mandhana
-							</p>
-							<div className="flex items-center gap-2 ">
-								<img
-									src="/assets/india.jpg"
-									alt="itersfgjds"
-									height={50}
-									width={50}
-								/>
-								<p className="text-gray-500">Business Tycoon</p>
+					<div className="container mx-auto">
+						<div className="flex-center gap-6 bg-slate-100 rounded-xl mx-5 my-5 px-3 py-3">
+							<Image
+								src="/assets/lady3.jpeg"
+								alt=""
+								height={200}
+								width={200}
+								className="rounded-xl"
+							/>
+							<div className="flex flex-col gap-5 items-start">
+								<p className="text-lg">Smriti Mandhana</p>
+								<div className="flex items-center gap-2">
+									<Image
+										src="/assets/india.jpg"
+										alt="itersfgjds"
+										height={50}
+										width={50}
+									/>
+									<p className="text-gray-500">
+										Business Tycoon
+									</p>
+								</div>
+								<p className="text-lg italic">
+									“Smooth experience with Koolie's packers and
+									movers! The team was fantastic, handling
+									every detail. Highly recommend their
+									services!“
+								</p>
 							</div>
-							<p className=" text-base sm:text-lg md:text-2xl lg:text-3xl w-xl">
-								“Smooth experience with Koolie's packers and
-								movers! The team was fantastic, handling every
-								detail. Highly recommend their services!“
-							</p>
 						</div>
 					</div>
-				</div>
-			</Slider>
+				</Slider>
+			</div>
 			<div className="container mx-auto py-20" id="faq">
-				<p className="text-gray-500 text-2xl font-medium uppercase my-3">
+				<p className="text-base lg:text-xl font-medium text-gray-500 text-center uppercase">
 					MORE INFO
 				</p>
-				<p className="text-gray-800 text-4xl font-medium capitalize mb-10">
+				<p className="text-3xl lg:text-5xl font-semibold text-gray-500 text-center mt-3 uppercase">
 					Common questions
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-10">
+				<div className="grid grid-cols-1 mt-5 md:grid-cols-2 gap-5">
 					{info.map((inf, i) => {
 						return (
 							<Disclosure key={i}>
 								{({ open }) => (
 									<div className="group">
-										<Disclosure.Button className="flex flex-col group-hover:bg-[#524fd5] group-focus:bg-[#524fd5] w-full justify-between rounded-lg lg:rounded-full border border-gray-200 px-8 py-10 text-left text-sm font-medium  focus:outline-none ">
+										<Disclosure.Button className="flex flex-col group-hover:bg-[#524fd5] group-focus:bg-[#524fd5] w-full justify-between rounded-lg lg:rounded-full bg-slate-100 border border-gray-200 px-8 py-5 text-left text-base font-medium  focus:outline-none ">
 											<div className="flex justify-between items-center w-full">
 												<span className="group-hover:text-white  group-focus:text-white">
 													{inf.title}
@@ -408,14 +358,16 @@ const Fullpage = () => {
 				</div>
 			</div>
 			<div className="container mx-auto my-10">
-				<div className="bg-[#f8fafe] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-10 px-10 py-10 rounded-3xl items-center justify-center ">
-					<div className="flex flex-col items-center lg:items-start gap-5">
-						<img
-							src="/assets/cooliebg.png"
-							alt="footer lgo"
-							height={400}
-							width={100}
-						/>
+				<div className="bg-[#f84f66] text-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-10 px-10 py-10 rounded-3xl items-center justify-center ">
+					<div className="flex flex-col items-center lg:items-start gap-5 ">
+						<Link href="/">
+							<Image
+								src="/logo.svg"
+								alt="footer lgo"
+								height={400}
+								width={100}
+							/>
+						</Link>
 						<p className="text-center lg:text-start">
 							Model Engineering College ,<br />
 							Thrikkakara ,<br />
